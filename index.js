@@ -51,7 +51,7 @@ let geocode = {
                if (request.status === 200) {
                     // Success!
                     let data = JSON.parse(request.responseText);
-                    // console.log(data.results[0].components.town); // print the location
+                    // alert(data.results[0].formatted); // print the location
                     weather.fetchweather(data.results[0].components.town);
                } else if (request.status <= 500) {
                     // We reached our target server, but it returned an error
@@ -76,11 +76,9 @@ let geocode = {
                geocode.reverseGeocode(data.coords.latitude, data.coords.longitude)
           }
           if (navigator.geolocation) {
-               navigator.geolocation.getCurrentPosition(success, console.error)
+               navigator.geolocation.getCurrentPosition(success,test)
 
-          } else {
-               weather.fetchweather("Denver")
-          }
+          } 
      }
 };
 
@@ -101,9 +99,9 @@ document.querySelector(".search").addEventListener("keyup", function (event) {
 
 
 
-geocode.getLocation();
 
 document.querySelector(".btn1").addEventListener("click", function () {
+     
      slideDown()
 
      geocode.getLocation();
@@ -111,4 +109,8 @@ document.querySelector(".btn1").addEventListener("click", function () {
 
 function slideDown() {
      document.querySelector(".wrapper").style.height = 325 + "px";
+}
+
+function test() {
+     document.querySelector(".location-timezone").innerText = "Enable your location."
 }
